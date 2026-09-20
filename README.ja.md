@@ -40,6 +40,8 @@ Synology Photosの一覧画面には便利な一括回転機能がありませ�
 
 Tampermonkey公式サイト、またはブラウザの拡張機能ストアからTampermonkeyをインストールします。
 
+![ChromeウェブストアのTampermonkey](./screenshots/01-tampermonkey-store.png)
+
 ### 2. ユーザースクリプトの実行を許可
 
 最近のChrome/Tampermonkeyでは、ユーザースクリプトを実行するための許可が必要になる場合があります。
@@ -50,13 +52,25 @@ Tampermonkey公式サイト、またはブラウザの拡張機能ストアか�
 
 スクリプトをインストールしたのにTampermonkeyで「まだ実行されていません」と表示される場合は、まずこの設定を確認してください。
 
+![Chromeでユーザースクリプトを許可](./screenshots/02-allow-user-scripts.png)
+
 ### 3. スクリプトをインストール
 
 次のファイルを開きます。
 
 [`synology-photos-bulk-rotate.user.js`](./synology-photos-bulk-rotate.user.js)
 
-続いて **Raw** を開くと、Tampermonkeyのインストール画面が表示されます。
+ファイル画面右上の **Raw** をクリックします。
+
+![GitHubのRawボタン](./screenshots/05-github-raw.png)
+
+Tampermonkeyのユーザースクリプトインストール画面が表示されます。すでにインストール済みの場合は「インストール」ではなく**「再インストール」**と表示されることがあります。
+
+![Tampermonkeyのインストール画面](./screenshots/06-tampermonkey-install.png)
+
+インストール後、Tampermonkeyのダッシュボードで **Synology Photos Bulk Rotate** が有効になっていることを確認できます。
+
+![インストール済みスクリプト](./screenshots/04-installed-script.png)
 
 > このスクリプトでは、Synology Photosが独自ドメイン、IPアドレス、さまざまなHTTPSポートで公開される可能性があるため、`@match https://*/*` を使用しています。実際のキー処理を行う前に、現在のページがSynology Photosかどうかを判定します。`@grant none` で動作し、外部サービスへデータを送信しません。
 >
@@ -72,9 +86,15 @@ Tampermonkey公式サイト、またはブラウザの拡張機能ストアか�
 
 1. ブラウザでSynology Photosを開きます。
 2. タイムライン/一覧画面で回転したい写真を複数選択します。
+
+![Synology Photosで複数写真を選択](./screenshots/07-select-photos.png)
 3. `R` で右へ90°、`L` で左へ90°回転します。
 4. 確認ダイアログで実行を承認します。
+
+![一括回転の確認ダイアログ](./screenshots/08-rotate-confirm.png)
 5. 選択した写真がまとめて回転し、対象サムネイルだけが更新されます。
+
+![一括回転後の写真](./screenshots/09-rotated-result.png)
 
 ページ全体は再読み込みされません。
 
