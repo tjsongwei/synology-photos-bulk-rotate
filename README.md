@@ -40,6 +40,8 @@ Other DSM / Synology Photos / browser versions may also work, but have not been 
 
 Install the Tampermonkey extension for your browser from the official Tampermonkey website or your browser's extension store.
 
+![Tampermonkey in Chrome Web Store](./screenshots/01-tampermonkey-store.png)
+
 ### 2. Allow user scripts
 
 Recent Chrome/Tampermonkey versions may require permission to execute user scripts.
@@ -52,13 +54,25 @@ Then enable **Allow User Scripts** (wording may differ depending on Chrome/Tampe
 
 If the script is installed but Tampermonkey says it has not executed, check this setting first.
 
+![Allow user scripts in Chrome](./screenshots/02-allow-user-scripts.png)
+
 ### 3. Install this userscript
 
 Open:
 
 [`synology-photos-bulk-rotate.user.js`](./synology-photos-bulk-rotate.user.js)
 
-Then open the **Raw** version of the file. Tampermonkey should offer to install the userscript.
+Click **Raw** on the file page:
+
+![GitHub Raw button](./screenshots/05-github-raw.png)
+
+Tampermonkey should then open the userscript installation screen. If the script is already installed, the button may say **Reinstall** instead of **Install**.
+
+![Tampermonkey userscript installation](./screenshots/06-tampermonkey-install.png)
+
+After installation, you can confirm that **Synology Photos Bulk Rotate** is enabled in the Tampermonkey dashboard.
+
+![Installed userscript](./screenshots/04-installed-script.png)
 
 > The script uses `@match https://*/*` because Synology Photos can be hosted on many different domains, IP addresses and HTTPS ports. The script immediately checks whether the current page is Synology Photos before handling keyboard input. It uses `@grant none` and does not send data to external services.
 >
@@ -74,11 +88,17 @@ Then open the **Raw** version of the file. Tampermonkey should offer to install 
 
 1. Open Synology Photos in your browser.
 2. Select two or more photos in the timeline/list view.
+
+![Select multiple photos in Synology Photos](./screenshots/07-select-photos.png)
 3. Press:
    - `R` to rotate the selected photos 90° clockwise.
    - `L` to rotate the selected photos 90° counter-clockwise.
 4. Confirm the operation.
+
+![Bulk rotate confirmation](./screenshots/08-rotate-confirm.png)
 5. The selected photos are rotated together and their thumbnails are refreshed.
+
+![Photos after bulk rotation](./screenshots/09-rotated-result.png)
 
 The page itself is not reloaded.
 
