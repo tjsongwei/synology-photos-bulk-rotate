@@ -40,6 +40,8 @@ Synology Photos 的照片列表目前没有方便的批量旋转操作。使用�
 
 从 Tampermonkey 官方网站或浏览器扩展商店安装 Tampermonkey。
 
+![Chrome 网上应用店中的 Tampermonkey](./screenshots/01-tampermonkey-store.png)
+
 ### 2. 允许用户脚本运行
 
 较新的 Chrome/Tampermonkey 版本可能需要额外允许用户脚本运行。
@@ -52,13 +54,25 @@ Synology Photos 的照片列表目前没有方便的批量旋转操作。使用�
 
 如果已经安装脚本，但 Tampermonkey 显示脚本“尚未运行”，请首先检查此设置。
 
+![在 Chrome 中允许用户脚本](./screenshots/02-allow-user-scripts.png)
+
 ### 3. 安装本脚本
 
 打开：
 
 [`synology-photos-bulk-rotate.user.js`](./synology-photos-bulk-rotate.user.js)
 
-然后点击 **Raw**。Tampermonkey 应会显示用户脚本安装页面。
+在文件页面右上方点击 **Raw**。
+
+![GitHub Raw 按钮](./screenshots/05-github-raw.png)
+
+随后 Tampermonkey 会打开用户脚本安装页面。如果脚本已经安装，按钮可能显示为**“重新安装”**而不是“安装”。
+
+![Tampermonkey 用户脚本安装页面](./screenshots/06-tampermonkey-install.png)
+
+安装后，可以在 Tampermonkey 控制面板中确认 **Synology Photos Bulk Rotate** 已启用。
+
+![已安装的用户脚本](./screenshots/04-installed-script.png)
 
 > 由于 Synology Photos 可能通过不同的域名、IP 地址以及 HTTPS 端口访问，本脚本使用 `@match https://*/*`。脚本在处理键盘输入之前会先判断当前页面是否为 Synology Photos。脚本使用 `@grant none`，不会向外部服务发送数据。
 >
@@ -74,9 +88,15 @@ Synology Photos 的照片列表目前没有方便的批量旋转操作。使用�
 
 1. 在浏览器中打开 Synology Photos。
 2. 在时间线/列表中选中需要旋转的多张照片。
+
+![在 Synology Photos 中选择多张照片](./screenshots/07-select-photos.png)
 3. 按 `R` 向右旋转90°，或按 `L` 向左旋转90°。
 4. 在确认对话框中确认执行。
+
+![批量旋转确认对话框](./screenshots/08-rotate-confirm.png)
 5. 所选照片将一起旋转，只刷新这些照片的缩略图。
+
+![批量旋转后的照片](./screenshots/09-rotated-result.png)
 
 页面本身不会重新加载。
 
