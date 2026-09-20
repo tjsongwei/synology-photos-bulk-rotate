@@ -1,5 +1,7 @@
 # Synology Photos Bulk Rotate
 
+**English** | [日本語](./README.ja.md) | [简体中文](./README.zh-CN.md)
+
 A Tampermonkey userscript that adds keyboard shortcuts and **bulk rotation** to the Synology Photos web interface.
 
 Synology Photos does not currently provide a convenient bulk-rotate command in the photo list. This script lets you select multiple photos and rotate them together without reloading the whole page.
