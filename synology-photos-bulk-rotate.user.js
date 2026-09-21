@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Synology Photos Bulk Rotate
 // @namespace    https://github.com/tjsongwei/synology-photos-bulk-rotate
-// @version      1.0.0
+// @version      1.0.1
 // @description  Bulk rotate selected photos in Synology Photos with R/L keyboard shortcuts.
 // @author       tjsongwei
 // @match        https://*/*
@@ -158,15 +158,40 @@
         return true;
     }
 
+    function getCurrentViewerPhotoId() {
+        const img = document.querySelector('.synofoto-lightbox-image:not(.hidden)');
+        if (!img?.src) return null;
+
+        try {
+            const id = new URL(img.src, location.href).searchParams.get('id');
+            return id && /^\\d+$/.test(id) ? Number(id) : null;
+        } catch (error) {
+            log('Failed to get current viewer photo ID:', error);
+            return null;
+        }
+    }
+
     async function rotateViewer(direction) {
         if (busy) return;
         busy = true;
         try {
-            const turns = direction === 'counter_clockwise' ? 1 : 3;
-            for (let i = 0; i < turns; i++) {
-                if (!await rotateViewerLeftOnce()) break;
-                if (i < turns - 1) await sleep(250);
+            if (direction === 'clockwise') {
+                const id = getCurrentViewerPhotoId();
+                if (!Number.isFinite(id)) {
+                    throw new Error('Could not determine the current photo ID.');
+                }
+
+                await rotateByApi([id], 'clockwise');
+                log('Rotated viewer photo clockwise:', id);
+                return;
             }
+
+            if (!await rotateViewerLeftOnce()) {
+                throw new Error('Could not find the Synology Photos rotate command.');
+            }
+        } catch (error) {
+            console.error('[Synology Photos Bulk Rotate]', error);
+            alert('回転処理に失敗しました。F12 → Console を確認してください。');
         } finally {
             busy = false;
         }
@@ -222,5 +247,5 @@
         }
     }, true);
 
-    log('v1.0.0 loaded');
+    log('v1.0.1 loaded');
 })();
