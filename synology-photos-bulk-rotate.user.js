@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Synology Photos Bulk Rotate
 // @namespace    https://github.com/tjsongwei/synology-photos-bulk-rotate
-// @version      1.0.1
+// @version      1.0.2
 // @description  Bulk rotate selected photos in Synology Photos with R/L keyboard shortcuts.
 // @author       tjsongwei
 // @match        https://*/*
@@ -164,7 +164,7 @@
 
         try {
             const id = new URL(img.src, location.href).searchParams.get('id');
-            return id && /^\\d+$/.test(id) ? Number(id) : null;
+            return id && /^\d+$/.test(id) ? Number(id) : null;
         } catch (error) {
             log('Failed to get current viewer photo ID:', error);
             return null;
@@ -247,5 +247,5 @@
         }
     }, true);
 
-    log('v1.0.1 loaded');
+    log('v1.0.2 loaded');
 })();
