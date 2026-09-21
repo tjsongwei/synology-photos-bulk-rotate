@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Synology Photos Bulk Rotate
 // @namespace    https://github.com/tjsongwei/synology-photos-bulk-rotate
-// @version      1.0.2
+// @version      1.0.3
 // @description  Bulk rotate selected photos in Synology Photos with R/L keyboard shortcuts.
 // @author       tjsongwei
 // @match        https://*/*
@@ -182,7 +182,16 @@
                 }
 
                 await rotateByApi([id], 'clockwise');
-                log('Rotated viewer photo clockwise:', id);
+                await sleep(500);
+
+                const img = document.querySelector('.synofoto-lightbox-image:not(.hidden)');
+                if (img?.src) {
+                    const url = new URL(img.src, location.href);
+                    url.searchParams.set('_tm_refresh', Date.now().toString());
+                    img.src = url.toString();
+                }
+
+                log('Rotated viewer photo clockwise and refreshed image:', id);
                 return;
             }
 
@@ -247,5 +256,5 @@
         }
     }, true);
 
-    log('v1.0.2 loaded');
+    log('v1.0.3 loaded');
 })();
